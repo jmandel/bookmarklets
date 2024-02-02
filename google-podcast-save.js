@@ -39,8 +39,11 @@ javascript:(function() {
             minLeft = 0;
         } else if (text.includes("min left")) {
             status = "partial";
-            const match = text.match(/\d+/);
-            minLeft = match ? parseInt(match[0], 10) : null;
+            const hourMatch = text.match(/(\d+)\s*hr/);
+            const minuteMatch = text.match(/(\d+)\s*min/);
+            const hours = hourMatch ? parseInt(hourMatch[1], 10) : 0;
+            const minutes = minuteMatch ? parseInt(minuteMatch[1], 10) : 0;
+            minLeft = hours * 60 + minutes;
         } else {
             status = "unplayed";
         }
